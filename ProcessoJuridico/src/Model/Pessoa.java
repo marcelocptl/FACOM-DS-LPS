@@ -1,157 +1,143 @@
-public class Pessoa  {
-	
-		private Integer codigo;
-	
-		private String nome;
-	
-		private String endereco;
-	
-		private String cidade;
-	
-		private String estado;
-	
-		private String cep;
-	
-		private String complemento;
-	
-		private String telefoneCelular;
-	
-		private String telefoneResidencial;
-	
-		private String email;
-	
-		private String usuario;
-	
-		private String senha;
-	
-		private Assistente ;
-	
-		private Documento ;
-	
-		private Processo ;
-	
-	
-	
-		public final Integer getCodigo() {
-			return this.codigo;
-		}
-	
-		public final String getNome() {
-			return this.nome;
-		}
-	
-		public final String getEndereco() {
-			return this.endereco;
-		}
-	
-		public final String getCidade() {
-			return this.cidade;
-		}
-	
-		public final String getEstado() {
-			return this.estado;
-		}
-	
-		public final String getCep() {
-			return this.cep;
-		}
-	
-		public final String getComplemento() {
-			return this.complemento;
-		}
-	
-		public final String getTelefoneCelular() {
-			return this.telefoneCelular;
-		}
-	
-		public final String getTelefoneResidencial() {
-			return this.telefoneResidencial;
-		}
-	
-		public final String getEmail() {
-			return this.email;
-		}
-	
-		public final String getUsuario() {
-			return this.usuario;
-		}
-	
-		public final String getSenha() {
-			return this.senha;
-		}
-	
-		public final Assistente get() {
-			return this.;
-		}
-	
-		public final Documento get() {
-			return this.;
-		}
-	
-		public final Processo get() {
-			return this.;
-		}
-	
-	
-	
-		public final void setCodigo(final Integer someCodigo) {
-			this.codigo = someCodigo;
-		}
-	
-		public final void setNome(final String someNome) {
-			this.nome = someNome;
-		}
-	
-		public final void setEndereco(final String someEndereco) {
-			this.endereco = someEndereco;
-		}
-	
-		public final void setCidade(final String someCidade) {
-			this.cidade = someCidade;
-		}
-	
-		public final void setEstado(final String someEstado) {
-			this.estado = someEstado;
-		}
-	
-		public final void setCep(final String someCep) {
-			this.cep = someCep;
-		}
-	
-		public final void setComplemento(final String someComplemento) {
-			this.complemento = someComplemento;
-		}
-	
-		public final void setTelefoneCelular(final String someTelefoneCelular) {
-			this.telefoneCelular = someTelefoneCelular;
-		}
-	
-		public final void setTelefoneResidencial(final String someTelefoneResidencial) {
-			this.telefoneResidencial = someTelefoneResidencial;
-		}
-	
-		public final void setEmail(final String someEmail) {
-			this.email = someEmail;
-		}
-	
-		public final void setUsuario(final String someUsuario) {
-			this.usuario = someUsuario;
-		}
-	
-		public final void setSenha(final String someSenha) {
-			this.senha = someSenha;
-		}
-	
-		public final void set(final Assistente some) {
-			this. = some;
-		}
-	
-		public final void set(final Documento some) {
-			this. = some;
-		}
-	
-		public final void set(final Processo some) {
-			this. = some;
-		}
-	
+package Model;
+
+public class Pessoa {
+
+    private int codigo;
+
+    private String nome;
+
+    private String endereco;
+
+    private String cidade;
+
+    private String estado;
+
+    private String cep;
+
+    private String complemento;
+
+    private String telefoneCelular;
+
+    private String telefoneResidencial;
+
+    private String email;
+
+    private String usuario;
+
+    private String senha;
+
+    public Pessoa() {
+    }
+
+    public Pessoa(int codigo, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.cep = cep;
+        this.complemento = complemento;
+        this.telefoneCelular = telefoneCelular;
+        this.telefoneResidencial = telefoneResidencial;
+        this.email = email;
+        this.usuario = usuario;
+        this.senha = senha;
+    }
+    
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getTelefoneCelular() {
+        return telefoneCelular;
+    }
+
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
+    }
+
+    public String getTelefoneResidencial() {
+        return telefoneResidencial;
+    }
+
+    public void setTelefoneResidencial(String telefoneResidencial) {
+        this.telefoneResidencial = telefoneResidencial;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
 }

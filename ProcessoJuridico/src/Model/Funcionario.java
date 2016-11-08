@@ -1,77 +1,69 @@
-public class Funcionario {
-	
-		private int rg;
-	
-		private int cpf;
-	
-		private Date dataNascimento;
-	
-		private String estadoCivil;
-	
-		private int ramal;
-	
-		private java.util.List<Processo> ;
-	
-		private java.util.List<Lembrete> ;
-	
-	
-	
-		public final int getRg() {
-			return this.rg;
-		}
-	
-		public final int getCpf() {
-			return this.cpf;
-		}
-	
-		public final Date getDataNascimento() {
-			return this.dataNascimento;
-		}
-	
-		public final String getEstadoCivil() {
-			return this.estadoCivil;
-		}
-	
-		public final int getRamal() {
-			return this.ramal;
-		}
-	
-		public final java.util.List<Processo> get() {
-			return this.;
-		}
-	
-		public final java.util.List<Lembrete> get() {
-			return this.;
-		}
-	
-	
-	
-		public final void setRg(final int someRg) {
-			this.rg = someRg;
-		}
-	
-		public final void setCpf(final int someCpf) {
-			this.cpf = someCpf;
-		}
-	
-		public final void setDataNascimento(final Date someDataNascimento) {
-			this.dataNascimento = someDataNascimento;
-		}
-	
-		public final void setEstadoCivil(final String someEstadoCivil) {
-			this.estadoCivil = someEstadoCivil;
-		}
-	
-		public final void setRamal(final int someRamal) {
-			this.ramal = someRamal;
-		}
-	
-		public final void set(final java.util.List<Processo> some) {
-			this. = some;
-		}
-	
-		public final void set(final java.util.List<Lembrete> some) {
-			this. = some;
-		}
-	
+package Model;
+
+import java.sql.Date;
+
+public class Funcionario extends Pessoa {
+
+    private int rg;
+
+    private int cpf;
+
+    private Date dataNascimento;
+
+    private String estadoCivil;
+
+    private int ramal;
+
+    public Funcionario() {
+    }
+   
+    public Funcionario(int rg, int cpf, Date dataNascimento, String estadoCivil, int ramal, int codigo, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        super(codigo, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.estadoCivil = estadoCivil;
+        this.ramal = ramal;
+    }
+    
+    public int getRg() {
+        return rg;
+    }
+
+    public void setRg(int rg) {
+        this.rg = rg;
+    }
+
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public int getRamal() {
+        return ramal;
+    }
+
+    public void setRamal(int ramal) {
+        this.ramal = ramal;
+    }
+
 }
