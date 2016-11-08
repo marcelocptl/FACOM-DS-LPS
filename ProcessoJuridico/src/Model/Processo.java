@@ -164,11 +164,11 @@ public class Processo {
         this.tipoProcesso = tipoProcesso;
     }
 
-    public List<Honorario> getHonorarios() {
+    public ArrayList<Honorario> getHonorarios() {
         return honorarios;
     }
 
-    public void setHonorarios(List<Honorario> honorarios) {
+    public void setHonorarios(ArrayList<Honorario> honorarios) {
         this.honorarios = honorarios;
     }
 
