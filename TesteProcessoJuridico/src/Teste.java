@@ -1,6 +1,7 @@
 
 import Model.Advogado;
 import Model.Processo;
+import Model.Cliente;
 
 
 /**
