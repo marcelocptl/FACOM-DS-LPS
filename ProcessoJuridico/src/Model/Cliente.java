@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author brucce
  */
-public class Cliente {
+public class Cliente extends Pessoa{
 
     private String documentoPessoal;
     private java.util.List<Lembrete> lembretes;

@@ -4,7 +4,7 @@ package Model;
  *
  * @author brucce
  */
-public class PessoaJuridica {
+public class PessoaJuridica extends Cliente{
 
     private String cnpj;
     private int inscricaoEstadual;

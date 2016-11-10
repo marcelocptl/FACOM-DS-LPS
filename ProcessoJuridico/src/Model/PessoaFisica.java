@@ -6,7 +6,7 @@ import java.sql.Date;
  *
  * @author brucce
  */
-public class PessoaFisica {
+public class PessoaFisica extends Cliente{
 
     private String rg;
     private String cpf;
