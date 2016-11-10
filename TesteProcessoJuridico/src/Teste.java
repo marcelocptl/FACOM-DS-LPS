@@ -1,5 +1,6 @@
 
 import Model.Advogado;
+import Model.Processo;
 
 
 /**
@@ -9,8 +10,7 @@ import Model.Advogado;
 public class Teste {
 
     public static void main(String[] args) {
-        Advogado adv = new Advogado();
-        System.out.println(adv);
+        Processo p = new Processo();
     }
     
 }
