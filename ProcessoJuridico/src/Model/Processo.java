@@ -31,7 +31,7 @@ public class Processo {
     public Processo() {
     }
 
-    public Processo(int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, List<Honorario> honorarios, Funcionario funcionario, Assistente assistente, List<Lembrete> lembretes) {
+    public Processo(int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, ArrayList<Honorario> honorarios, Funcionario funcionario, Assistente assistente, ArrayList<Lembrete> lembretes) {
         this.numero = numero;
         this.numeroAux = numeroAux;
         this.reclamada = reclamada;
