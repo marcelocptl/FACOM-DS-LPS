@@ -1,5 +1,8 @@
 package Dao;
 
+import Model.PessoaFisica;
+import Model.PessoaJuridica;
+import Model.Processo;
 import java.util.ArrayList;
 
 /**

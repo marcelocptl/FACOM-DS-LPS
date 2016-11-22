@@ -50,7 +50,7 @@ public class Pessoa {
     }
     
     public int inserir() {
-        return 0;
+        return -1;
     }
     
     public int getCodigo() {

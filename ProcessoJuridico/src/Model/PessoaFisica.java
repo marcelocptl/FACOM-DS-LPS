@@ -1,5 +1,6 @@
 package Model;
 
+import Dao.ClienteDao;
 import java.sql.Date;
 
 /**
@@ -16,16 +17,9 @@ public class PessoaFisica extends Cliente{
     public PessoaFisica() {
     }
 
-    public PessoaFisica(String rg, String cpf, Date dataNascimento, String estadoCivil) {
-        this.rg = rg;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.estadoCivil = estadoCivil;
-    }
-
-    @Override
-    public String toString() {
-        return "P Fisica - " + cpf;        
+    public int inserir() {
+        ClienteDao dao = new ClienteDao();
+        return dao.inserir(this);
     }
     
     public String getRg() {
