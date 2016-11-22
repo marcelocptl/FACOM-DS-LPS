@@ -43,6 +43,15 @@ public class Pessoa {
         this.usuario = usuario;
         this.senha = senha;
     }
+
+    @Override
+    public String toString() {
+        return "Pessoa";
+    }
+    
+    public Object inserir() {
+        return this;
+    }
     
     public int getCodigo() {
         return codigo;

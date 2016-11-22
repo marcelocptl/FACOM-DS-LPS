@@ -22,17 +22,6 @@ public class Lembrete {
     public Lembrete() {
     }
 
-    public Lembrete(Date data, Time hora, String local, String assunto, String descricao, Cliente cliente, Processo processo, Funcionario funcionario) {
-        this.data = data;
-        this.hora = hora;
-        this.local = local;
-        this.assunto = assunto;
-        this.descricao = descricao;
-        this.cliente = cliente;
-        this.processo = processo;
-        this.funcionario = funcionario;
-    }
-
     public Date getData() {
         return data;
     }
@@ -99,5 +88,17 @@ public class Lembrete {
     
     public ArrayList<Lembrete> lembrar() {
         return null;
+    }
+
+    public int inserir() {
+        return 0;
+    }
+
+    public int atualizar() {
+        return 0;
+    }
+
+    public int deletar() {
+        return 0;
     }
 }

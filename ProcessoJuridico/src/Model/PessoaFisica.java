@@ -23,6 +23,11 @@ public class PessoaFisica extends Cliente{
         this.estadoCivil = estadoCivil;
     }
 
+    @Override
+    public String toString() {
+        return "P Fisica - " + cpf;        
+    }
+    
     public String getRg() {
         return rg;
     }
