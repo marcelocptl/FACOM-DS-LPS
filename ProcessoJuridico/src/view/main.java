@@ -12,7 +12,7 @@ import java.sql.Time;
 import util.ConnectFactory;
 
 public class main {
-
+    
     public static void main(String args[]) throws SQLException {
         Connection connect = ConnectFactory.getConnection();
         System.out.println(connect.isClosed());
