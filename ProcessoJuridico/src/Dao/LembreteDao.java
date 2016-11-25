@@ -33,8 +33,8 @@ public class LembreteDao {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -42,15 +42,15 @@ public class LembreteDao {
     public int deletar(Lembrete antigo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "delete Lembrete where id = ?";
+            String query = "delete from Lembrete where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1, antigo.getCodigo());
             preparedStmt.execute();
             conn.close();
             return antigo.getCodigo();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -74,8 +74,8 @@ public class LembreteDao {
             conn.close();
             return atual.getCodigo();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -104,8 +104,8 @@ public class LembreteDao {
             conn.close();
             return lembretes;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }
@@ -113,7 +113,7 @@ public class LembreteDao {
     public ArrayList<Lembrete> lembrar() {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM lembrete";
+            String query = "SELECT * FROM lembrete WHERE data <= '" + new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Lembrete> lembretes = new ArrayList<>();
@@ -134,8 +134,8 @@ public class LembreteDao {
             conn.close();
             return lembretes;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }

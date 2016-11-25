@@ -1,5 +1,6 @@
 package Model;
 
+import Dao.ClienteDao;
 import Dao.FuncionarioDao;
 
 public class Advogado extends Funcionario {
@@ -12,7 +13,8 @@ public class Advogado extends Funcionario {
     }
     
     public int inserir(){
-        return new FuncionarioDao().inserir(this);
+        setCodigo(new FuncionarioDao().inserir(this));
+        return getCodigo();
     }
    
     public int getNumRegistroOAB() {

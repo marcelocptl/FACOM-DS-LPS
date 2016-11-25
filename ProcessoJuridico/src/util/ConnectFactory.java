@@ -15,10 +15,9 @@ import java.sql.SQLException;
  */
 public class ConnectFactory {
     
-    public Connection getConnection() {
+    public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(
-                    "jdbc:mysql://192.168.29.110:3306/test", "root", "mysql");
+            return DriverManager.getConnection("jdbc:mysql://localhost/teste", "root", "admin");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

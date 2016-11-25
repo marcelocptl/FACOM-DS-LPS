@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author brucce
  */
-public class PessoaFisica extends Pessoa {
+public class PessoaFisica extends Cliente {
 
     private String rg;
     private String cpf;
@@ -27,7 +27,8 @@ public class PessoaFisica extends Pessoa {
     }
     
     public int inserir() {
-        return new ClienteDao().inserir(this);
+        setCodigo(new ClienteDao().inserir(this));
+        return getCodigo();
     }
     
     public int atualizar(){

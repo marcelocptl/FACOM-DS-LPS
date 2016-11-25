@@ -1,5 +1,6 @@
 package Model;
 
+import Dao.LembreteDao;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -96,18 +97,23 @@ public class Lembrete {
     }
     
     public ArrayList<Lembrete> lembrar() {
-        return null;
+        return new LembreteDao().lembrar();
+    }
+    
+    public ArrayList<Lembrete> listar() {
+        return new LembreteDao().listar();
     }
 
     public int inserir() {
-        return 0;
+        setCodigo(new LembreteDao().inserir(this));
+        return getCodigo();
     }
 
     public int atualizar() {
-        return 0;
+        return new LembreteDao().atualizar(this);
     }
 
     public int deletar() {
-        return 0;
+        return new LembreteDao().deletar(this);
     }
 }

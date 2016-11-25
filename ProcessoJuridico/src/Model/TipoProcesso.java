@@ -19,7 +19,8 @@ public class TipoProcesso {
     }
     
     public int inserir(){
-        return new TipoProcessoDao().inserir(this);
+        setCodigo(new TipoProcessoDao().inserir(this));
+        return getCodigo();
     }
 
     public int getCodigo() {

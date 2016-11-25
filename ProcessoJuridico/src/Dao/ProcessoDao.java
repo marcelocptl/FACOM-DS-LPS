@@ -1,7 +1,6 @@
 package Dao;
 
 import Model.Advogado;
-import Model.Lembrete;
 import java.util.ArrayList;
 import Model.Processo;
 import java.sql.Connection;
@@ -19,7 +18,11 @@ public class ProcessoDao {
     public int inserir(Processo novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Processo (numero, numeroaux, reclamada, descricao, situacao, observacao, cidade, fase, datainicial, datafinal, documento, id_tipoprocesso, id_pessoa, id_advogado, id_assistente) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into processo (numero, numeroaux, reclamada, descricao, situacao, observacao, cidade, fase, datainicial, datafinal, documento, id_tipoprocesso, id_pessoa, id_advogado";
+            query += novo.getAssistente() == null ? "" : ", id_assistente";
+            query += ") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
+            query += novo.getAssistente() == null ? "" : ", ?";
+            query += ")";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setInt(1, novo.getNumero());
             preparedStmt.setInt(2, novo.getNumeroAux());
@@ -35,15 +38,18 @@ public class ProcessoDao {
             preparedStmt.setInt(12, novo.getTipoProcesso().getCodigo());
             preparedStmt.setInt(13, novo.getCliente().getCodigo());
             preparedStmt.setInt(14, novo.getAdvogado().getCodigo());
-            preparedStmt.setInt(15, novo.getAssistente().getCodigo());
+            if(novo.getAssistente() != null){
+                preparedStmt.setInt(15, novo.getAssistente().getCodigo());
+            }
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
+            //System.err.println("Ocorreu uma exceção!");
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -58,8 +64,8 @@ public class ProcessoDao {
             conn.close();
             return antigo.getCodigo();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -90,8 +96,8 @@ public class ProcessoDao {
             conn.close();
             return atual.getCodigo();
         } catch (Exception e) {
-            System.err.println("Ocorrtamoeu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorrtamoeu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -125,8 +131,8 @@ public class ProcessoDao {
             conn.close();
             return processos;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }
@@ -156,8 +162,8 @@ public class ProcessoDao {
             conn.close();
             return processos;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }
@@ -187,8 +193,8 @@ public class ProcessoDao {
             conn.close();
             return processos;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }
@@ -218,8 +224,8 @@ public class ProcessoDao {
             conn.close();
             return processos;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }
@@ -249,8 +255,8 @@ public class ProcessoDao {
             conn.close();
             return processos;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return null;
     }

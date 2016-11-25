@@ -6,7 +6,7 @@ import Dao.ClienteDao;
  *
  * @author brucce
  */
-public class PessoaJuridica extends Pessoa {
+public class PessoaJuridica extends Cliente {
 
     private String cnpj;
     private int inscricaoEstadual;
@@ -27,7 +27,8 @@ public class PessoaJuridica extends Pessoa {
     }
     
     public int inserir() {
-        return new ClienteDao().inserir(this);
+        setCodigo(new ClienteDao().inserir(this));
+        return getCodigo();
     }
     
     public String getCnpj() {

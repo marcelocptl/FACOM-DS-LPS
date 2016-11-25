@@ -13,7 +13,7 @@ public class ProcessoCompleto extends Processo {
     private String localidadeFaseAtual;
     private String forumFaseAtual;
     private String vara;
-
+    
     public String getPosicaoCliente() {
         return posicaoCliente;
     }

@@ -18,7 +18,7 @@ public class ClienteDao {
     public int inserir(PessoaFisica novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -36,7 +36,7 @@ public class ClienteDao {
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 int lastId = rs.getInt(1);
-                query = "insert into PessoaFisica (id, rg, cpf, dataNascimento, estadoCivil) values (?, ?, ?, ?, ?)";
+                query = "insert into PessoaFisica (id, rg, cpf, dataNasc, estadoCivil) values (?, ?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(query);
                 preparedStmt.setInt(1, lastId);
                 preparedStmt.setString(2, novo.getRg());
@@ -48,8 +48,8 @@ public class ClienteDao {
             }
             conn.close();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //ystem.err.println(e.getMessage());
         }
         return -1;
     }
@@ -64,8 +64,8 @@ public class ClienteDao {
             conn.close();
             return 1;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -73,7 +73,7 @@ public class ClienteDao {
     public int atualizar(PessoaFisica atual) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telefoneCelular = ?, telefoneResidencial = ?, email = ?, usuario = ?, senha = ? where id = ?";
+            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telcelular = ?, telresid = ?, email = ?, usuario = ?, senha = ? where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, atual.getNome());
             preparedStmt.setString(2, atual.getEndereco());
@@ -89,7 +89,7 @@ public class ClienteDao {
             preparedStmt.setInt(12, atual.getCodigo());
             preparedStmt.executeUpdate();
 
-            query = "update PessoaFisica set rg = ?, cpf = ?, dataNascimento = ?, estadoCivil = ? where id = ?";
+            query = "update PessoaFisica set rg = ?, cpf = ?, dataNasc = ?, estadoCivil = ? where id = ?";
             preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, atual.getRg());
             preparedStmt.setString(2, atual.getCpf());
@@ -100,8 +100,8 @@ public class ClienteDao {
             conn.close();
             return 1;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -113,7 +113,7 @@ public class ClienteDao {
     public int inserir(PessoaJuridica novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -144,8 +144,8 @@ public class ClienteDao {
             }
             conn.close();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -159,8 +159,8 @@ public class ClienteDao {
             preparedStmt.execute();
             return 1;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
@@ -168,7 +168,7 @@ public class ClienteDao {
     public int atualizar(PessoaJuridica atual) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telefoneCelular = ?, telefoneResidencial = ?, email = ?, usuario = ?, senha = ? where id = ?";
+            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telcelular = ?, telresid = ?, email = ?, usuario = ?, senha = ? where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, atual.getNome());
             preparedStmt.setString(2, atual.getEndereco());
@@ -196,28 +196,14 @@ public class ClienteDao {
             conn.close();
             return 1;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
     
     public static Cliente getCodigo(int id){
-        try {
-            Connection conn = ConnectFactory.getConnection();
-            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telefoneCelular = ?, telefoneResidencial = ?, email = ?, usuario = ?, senha = ? where id = ?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            preparedStmt.executeUpdate();
-
-            query = "update PessoaJuridica set cnpj = ?, inscricaoEstadual = ?, inscricaoMunicipal = ?, site = ?, nomeFantasia = ? where id = ?";
-            
-            preparedStmt.executeUpdate();
-            conn.close();
-        } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
-        }
+        
         return null;
     }
 

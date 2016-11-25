@@ -10,6 +10,13 @@ public class Cliente extends Pessoa{
     private String documentoPessoal;
     private java.util.List<Lembrete> lembretes;
 
+    public Cliente() {
+    }
+    
+    public Cliente(int codigo, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        super(codigo, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
+    }
+    
     public String getDocumentoPessoal() {
         return documentoPessoal;
     }

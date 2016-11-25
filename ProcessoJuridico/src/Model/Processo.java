@@ -1,5 +1,6 @@
 package Model;
 
+import Dao.ProcessoDao;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -52,7 +53,38 @@ public class Processo {
         this.assistente = assistente;
         this.lembretes = lembretes;
     }
+    
+    public int inserir(){
+        setCodigo(new ProcessoDao().inserir(this));
+        return getCodigo();
+    }
+    public int deletar(){
+        return new ProcessoDao().deletar(this);
+    }
+    public int atualizar(){
+        return new ProcessoDao().atualizar(this);
+    }
 
+    public ArrayList<Processo> listar(){
+        return new ProcessoDao().listar();
+    }
+    
+    public ArrayList<Processo> filtrar(String string){
+        return new ProcessoDao().filtrar(string);
+    }
+    
+    public ArrayList<Processo> relatorioProcessos(String situacao) {
+        return new ProcessoDao().relatorioProcessos(situacao);
+    }
+    
+    public ArrayList<Processo> relatorioConcluido(boolean pago){
+        return new ProcessoDao().relatorioConcluido(pago);
+    }
+    
+    public ArrayList<Processo> listarPorPessoa(String string){
+        return new ProcessoDao().listarPorPessoa(string);
+    }
+    
     public int getCodigo() {
         return id;
     }
@@ -203,21 +235,5 @@ public class Processo {
 
     public void setLembretes(ArrayList<Lembrete> lembretes) {
         this.lembretes = lembretes;
-    }
-
-    public ArrayList<Processo> filtrar(String string){
-        return null;
-    }
-    
-    public ArrayList<Processo> relatorioProcesso(String situacao){
-        return null;
-    }
-    
-    public ArrayList<Processo> relatorioConcluido(boolean pago){
-        return null;
-    }
-    
-    public ArrayList<Processo> listarPorPessoa(String string){
-        return null;
     }
 }

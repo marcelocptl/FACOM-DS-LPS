@@ -15,7 +15,7 @@ public class FuncionarioDao {
     public int inserir(Advogado novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -28,12 +28,12 @@ public class FuncionarioDao {
             preparedStmt.setString(9, novo.getEmail());
             preparedStmt.setString(10, novo.getUsuario());
             preparedStmt.setString(11, novo.getSenha());
-            preparedStmt.setString(12, "FUNCIONARIO");
+            preparedStmt.setString(12, "FUNCIONARI");
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 int lastId = rs.getInt(1);
-                query = "insert into Funcionario (id, rg, cpf, dataNascimento, estadoCivil, ramal, flag) values (?, ?, ?, ?, ?, ?, ?)";
+                query = "insert into Funcionario (id, rg, cpf, dataNascimento, estadoCivil, ramal, flag, numRegistroOAB, situacaoRegistroOAB) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(query);
                 preparedStmt.setInt(1, lastId);
                 preparedStmt.setString(2, novo.getRg());
@@ -42,16 +42,14 @@ public class FuncionarioDao {
                 preparedStmt.setString(5, novo.getEstadoCivil());
                 preparedStmt.setInt(6, novo.getRamal());
                 preparedStmt.setString(7, "ADVOGADO");
-                query = "insert into Advogado (id, numRegistroOAB, situacaoRegistroOAB) values (?, ?, ?)";
-                preparedStmt = conn.prepareStatement(query);
-                preparedStmt.setInt(1, lastId);
-                preparedStmt.setInt(2, novo.getNumRegistroOAB());
-                preparedStmt.setString(3, novo.getSituacaoRegistroOAB());
+                preparedStmt.setInt(8, novo.getNumRegistroOAB());
+                preparedStmt.setString(9, novo.getSituacaoRegistroOAB());
+                preparedStmt.execute();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
+            //System.err.println("Ocorreu uma exceção!");
             System.err.println(e.getMessage());
         }
         return -1;
@@ -70,9 +68,9 @@ public class FuncionarioDao {
     }
 
     public int inserir(Assistente novo) {
-         try {
+        try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -99,11 +97,12 @@ public class FuncionarioDao {
                 preparedStmt.setString(5, novo.getEstadoCivil());
                 preparedStmt.setInt(6, novo.getRamal());
                 preparedStmt.setString(7, "ASSISTENTE");
+            preparedStmt.execute();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
+            //System.err.println("Ocorreu uma exceção!");
             System.err.println(e.getMessage());
         }
         return -1;
@@ -116,8 +115,8 @@ public class FuncionarioDao {
     public int atualizar(Assistente atual) {
         return -1;
     }
-    
-    public static Funcionario getCodigo(int id){
+
+    public static Funcionario getCodigo(int id) {
         return null;
     }
 

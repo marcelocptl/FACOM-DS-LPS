@@ -17,7 +17,7 @@ public class TipoProcessoDao {
     public int inserir(TipoProcesso novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Tipoprocesso (descricaoa) values (?)";
+            String query = "insert into tipoprocesso (descricao) values (?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getDescricao());
             preparedStmt.execute();
@@ -26,8 +26,8 @@ public class TipoProcessoDao {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
         }
         return -1;
     }
