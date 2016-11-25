@@ -3,13 +3,19 @@ package view;
 import Model.Advogado;
 import Model.Lembrete;
 import Model.PessoaFisica;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
+import util.ConnectFactory;
 
 public class main {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
 
+        Connection connect = new ConnectFactory().getConnection();                
+        System.out.println(connect.getSchema());
+        
         PessoaFisica pf = new PessoaFisica();
         pf.setNome("Ricardo");
         pf.setEndereco("Rua X");
@@ -19,7 +25,7 @@ public class main {
         pf.setCep("XXXXXXXX");
         pf.setRg("XXXXXXXXX");
         pf.setCpf("XXXXXXXXXXX");
-        pf.setDataNascimento(Date.valueOf("1992-01-01"));
+        //pf.setDataNascimento(Date.valueOf("1992-01-01"));
         pf.setEstadoCivil("solteiro");
         pf.setEmail("mail@mail.com");
         pf.setTelefoneCelular("00000000000");
@@ -44,7 +50,7 @@ public class main {
         ad.setCep("XXXXXXXX");
         ad.setRg("XXXXXXXXX");
         ad.setCpf("XXXXXXXXXXX");
-        ad.setDataNascimento(Date.valueOf("1977-11-06"));
+        //ad.setDataNascimento(Date.valueOf("1977-11-06"));
         ad.setEstadoCivil("casada");
         ad.setNumRegistroOAB(3436);
         ad.setRamal(1005);
@@ -61,8 +67,8 @@ public class main {
         Lembrete lem = new Lembrete();
         lem.setFuncionario(ad);
         lem.setCliente(pf);
-        lem.setData(Date.valueOf("2016-11-22"));
-        lem.setHora(Time.valueOf("12:00"));
+        //lem.setData(Date.valueOf("2016-11-22"));
+        //lem.setHora(Time.valueOf("12:00"));
         lem.setLocal("");
         lem.setAssunto("Atualizar Processo");
         lem.setDescricao("");
@@ -72,7 +78,7 @@ public class main {
         lem.inserir();
 
         //atualizar
-        lem.setHora(Time.valueOf("13:00"));
+        //lem.setHora(Time.valueOf("13:00"));
         lem.atualizar();
 
         //deletar
