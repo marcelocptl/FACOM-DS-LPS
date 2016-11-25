@@ -8,7 +8,8 @@ import java.util.ArrayList;
  * @author brucce
  */
 public class Processo {
-
+    
+    private int id;
     private int numero;
     private int numeroAux;
     private String reclamada;
@@ -52,6 +53,14 @@ public class Processo {
         this.lembretes = lembretes;
     }
 
+    public int getCodigo() {
+        return id;
+    }
+
+    public void setCodigo(int id) {
+        this.id = id;
+    }
+    
     public int getNumero() {
         return numero;
     }

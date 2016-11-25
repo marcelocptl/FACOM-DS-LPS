@@ -1,5 +1,7 @@
 package Model;
 
+import Dao.TipoProcessoDao;
+
 /**
  *
  * @author brucce
@@ -14,6 +16,10 @@ public class TipoProcesso {
     public TipoProcesso(int codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
+    }
+    
+    public int inserir(){
+        return new TipoProcessoDao().inserir(this);
     }
 
     public int getCodigo() {

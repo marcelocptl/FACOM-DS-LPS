@@ -49,10 +49,6 @@ public class Pessoa {
         return "Pessoa";
     }
     
-    public int inserir() {
-        return -1;
-    }
-    
     public int getCodigo() {
         return codigo;
     }

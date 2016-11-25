@@ -1,6 +1,6 @@
 package Model;
 
-import java.sql.Date;
+import Dao.FuncionarioDao;
 
 public class Advogado extends Funcionario {
 
@@ -9,6 +9,10 @@ public class Advogado extends Funcionario {
     private String situacaoRegistroOAB;
 
     public Advogado() {
+    }
+    
+    public int inserir(){
+        return new FuncionarioDao().inserir(this);
     }
    
     public int getNumRegistroOAB() {

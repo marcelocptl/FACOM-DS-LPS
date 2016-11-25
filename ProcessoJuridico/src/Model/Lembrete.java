@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Lembrete {
 
+    private int id;
     private Date data;
     private Time hora;
     private String local;
@@ -22,6 +23,14 @@ public class Lembrete {
     public Lembrete() {
     }
 
+    public int getCodigo(){
+        return id;
+    }
+    
+    public void setCodigo(int id){
+        this.id = id;
+    }
+    
     public Date getData() {
         return data;
     }

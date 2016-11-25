@@ -1,7 +1,7 @@
 package Dao;
 
 import java.util.ArrayList;
-
+import Model.Honorario;
 /**
  *
  * @author brucce
