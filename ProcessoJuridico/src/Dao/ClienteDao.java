@@ -94,7 +94,36 @@ public class ClienteDao {
         return -1;
     }
     
-    public static Cliente getObj(int id){        
-        return null;
+    public static Cliente getObj(){
+	try {
+            Connection conn = ConnectFactory.getConnection();
+            String query = "SELECT * FROM pessoa WHERE id = " + id;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                Cliente c = new Cliente();
+                c.setId(rs.getInt("id"));
+                c.setNome(rs.getString("nome"));
+                c.setEndereco(rs.getString("endereco"));
+                c.setCidade(rs.getString("cidade"));
+                c.setEstado(rs.getString("estado"));
+                c.setCep(rs.getString("cep"));
+                c.setComplemento(rs.getString("complemento"));
+                c.setTelefoneCelular(rs.getString("telcelular"));
+                c.setTelefoneResidencial(rs.getString("telresid"));
+                c.setEmail(rs.getString("email"));
+                c.setUsuario(rs.getString("usuario"));
+                c.setSenha(rs.getString("senha"));
+           	st.close();
+           	conn.close();
+           	return c;
+            }
+            st.close();
+            conn.close();
+        } catch (Exception e) {
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
+        }
+	return null;
     }
 }

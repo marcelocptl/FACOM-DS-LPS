@@ -3,6 +3,8 @@ package Dao;
 import Model.Advogado;
 import java.util.ArrayList;
 import Model.Processo;
+import Model.Cliente;
+import Model.ProcessoCompleto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,8 @@ public class ProcessoDao {
             query += novo.getAssistente() == null ? "" : ", ?";
             query += ")";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStmt.setInt(1, novo.getNumero());
-            preparedStmt.setInt(2, novo.getNumeroAux());
+            preparedStmt.setString(1, novo.getNumero());
+            preparedStmt.setString(2, novo.getNumeroAux());
             preparedStmt.setString(3, novo.getReclamada());
             preparedStmt.setString(4, novo.getDescricao());
             preparedStmt.setString(5, novo.getSituacao());
@@ -75,8 +77,8 @@ public class ProcessoDao {
             Connection conn = ConnectFactory.getConnection();
             String query = "update processo set numero = ?, numeroaux = ?, reclamada = ?, descricao = ?, situacao = ?, observacao = ?, cidade = ?, fase = ?, datainicial = ?, datafinal = ?, documento = ?, id_tipoprocesso = ?, id_pessoa = ?, id_advogado = ?, id_assistente = ? where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1, atual.getNumero());
-            preparedStmt.setInt(2, atual.getNumeroAux());
+            preparedStmt.setString(1, atual.getNumero());
+            preparedStmt.setString(2, atual.getNumeroAux());
             preparedStmt.setString(3, atual.getReclamada());
             preparedStmt.setString(4, atual.getDescricao());
             preparedStmt.setString(5, atual.getSituacao());
@@ -103,6 +105,31 @@ public class ProcessoDao {
     }
 
     public static Processo getObj(int id) {
+	try {
+            Connection conn = ConnectFactory.getConnection();
+            String query = "SELECT * FROM processo WHERE id = " + id;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                Processo proc = new Processo();
+                proc.setId(rs.getInt("id"));
+                proc.setNumero(rs.getString("numero"));
+                proc.setNumeroAux(rs.getString("numeroaux"));
+                proc.setReclamada(rs.getString("reclamada"));
+                proc.setDescricao(rs.getString("descricao"));
+                proc.setSituacao(rs.getString("situacao"));
+                proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
+                proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+           	st.close();
+           	conn.close();
+           	return proc;
+            }
+        } catch (Exception e) {
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
+        }
         return null;
     }
 
@@ -116,8 +143,8 @@ public class ProcessoDao {
             while (rs.next()) {
                 Processo proc = new Processo();
                 proc.setId(rs.getInt("id"));
-                proc.setNumero(rs.getInt("numero"));
-                proc.setNumeroAux(rs.getInt("numeroaux"));
+                proc.setNumero(rs.getString("numero"));
+                proc.setNumeroAux(rs.getString("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
@@ -140,15 +167,15 @@ public class ProcessoDao {
     public ArrayList<Processo> filtrar(String string) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM Processo";
+            String query = "SELECT processo.* FROM processo INNER JOIN pessoa ON pessoa.id = processo.id_pessoa WHERE numero LIKE '" + string +"' OR numeroaux LIKE '" + string +"' OR reclamada LIKE '%" + string +"%' OR pessoa.nome LIKE '%" + string +"%' ";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
                 proc.setId(rs.getInt("id"));
-                proc.setNumero(rs.getInt("numero"));
-                proc.setNumeroAux(rs.getInt("numeroaux"));
+                proc.setNumero(rs.getString("numero"));
+                proc.setNumeroAux(rs.getString("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
@@ -171,15 +198,15 @@ public class ProcessoDao {
     public ArrayList<Processo> relatorioProcessos(String situacao) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM processo";
+            String query = "SELECT * FROM processo ORDER BY id_tipoprocesso";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
                 proc.setId(rs.getInt("id"));
-                proc.setNumero(rs.getInt("numero"));
-                proc.setNumeroAux(rs.getInt("numeroaux"));
+                proc.setNumero(rs.getString("numero"));
+                proc.setNumeroAux(rs.getString("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
@@ -202,15 +229,16 @@ public class ProcessoDao {
     public ArrayList<Processo> relatorioConcluido(boolean pago) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM processo";
+            String query = "SELECT processo.* FROM processo INNER JOIN Honorario ON processo.id = honorario.id_processo WHERE datapagamento IS ";
+	    query += pago ? "NOT NULL" : "NULL";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
                 proc.setId(rs.getInt("id"));
-                proc.setNumero(rs.getInt("numero"));
-                proc.setNumeroAux(rs.getInt("numeroaux"));
+                proc.setNumero(rs.getString("numero"));
+                proc.setNumeroAux(rs.getString("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
@@ -230,18 +258,18 @@ public class ProcessoDao {
         return null;
     }
 
-    public ArrayList<Processo> listarPorPessoa(String string) {
+    public ArrayList<Processo> listarPorPessoa(Cliente c) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM Processo";
+            String query = "SELECT * FROM processo WHERE id_pessoa = " + c.getId();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
                 proc.setId(rs.getInt("id"));
-                proc.setNumero(rs.getInt("numero"));
-                proc.setNumeroAux(rs.getInt("numeroaux"));
+                proc.setNumero(rs.getString("numero"));
+                proc.setNumeroAux(rs.getString("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
@@ -259,5 +287,28 @@ public class ProcessoDao {
             //System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public int inserir(ProcessoCompleto novo) {
+        try {
+	    int id = inserir((Processo)novo);
+            Connection conn = ConnectFactory.getConnection();
+            String query = "insert into processocompleto (id, posicaoclientecomp, adversocomp, posicaoadversocomp, advogadoadversocomp, localidadefaseatualcomp, forumfaseatualcomp, varacomp) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setInt(1, id);
+            preparedStmt.setString(2, novo.getPosicaoCliente());
+            preparedStmt.setString(3, novo.getAdverso());
+            preparedStmt.setString(4, novo.getPosicaoAdverso());
+            preparedStmt.setString(5, novo.getAdvogadoAdverso());
+            preparedStmt.setString(6, novo.getLocalidadeFaseAtual());
+            preparedStmt.setString(7, novo.getForumFaseAtual());
+            preparedStmt.setString(8, novo.getVara());
+            return id;
+        } catch (Exception e) {
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
+            //e.printStackTrace();
+        }
+        return -1;
     }
 }

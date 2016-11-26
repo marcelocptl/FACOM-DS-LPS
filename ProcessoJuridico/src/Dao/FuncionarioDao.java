@@ -97,6 +97,43 @@ public class FuncionarioDao {
     }
 
     public static Funcionario getObj(int id) {
+            Connection conn = ConnectFactory.getConnection();
+            String query = "SELECT * FROM pessoa WHERE id = " + id;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+	    query = "SELECT * FROM funcionario WHERE id = " + id;
+	    st = conn.createStatement();
+            ResultSet rs2 = st.executeQuery(query);
+            if (rs.next() && rs2.next()) {
+                Funcionario f = new Funcionario();
+                f.setId(rs.getInt("id"));
+                f.setNome(rs.getString("nome"));
+                f.setEndereco(rs.getString("endereco"));
+                f.setCidade(rs.getString("cidade"));
+                f.setEstado(rs.getString("estado"));
+                f.setCep(rs.getString("cep"));
+                f.setComplemento(rs.getString("complemento"));
+                f.setTelefoneCelular(rs.getString("telcelular"));
+                f.setTelefoneResidencial(rs.getString("telresid"));
+                f.setEmail(rs.getString("email"));
+                f.setUsuario(rs.getString("usuario"));
+                f.setSenha(rs.getString("senha"));
+
+                f.setRg(rs.getString("rg"));
+                f.setCpf(rs.getString("cpf"));
+                f.setDataNascimento(rs.getDate("datanascimento"));
+                f.setEstadoCivil(rs.getString("estadocivil"));
+                f.setRamal(rs.getInt("ramal"));
+           	st.close();
+           	conn.close();
+           	return f;
+            }
+            st.close();
+            conn.close();
+        } catch (Exception e) {
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
+        }
         return null;
     }
 

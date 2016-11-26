@@ -33,6 +33,25 @@ public class TipoProcessoDao {
     }
     
     public static TipoProcesso getObj(int id){
+	try {
+            Connection conn = ConnectFactory.getConnection();
+            String query = "SELECT * FROM Tipoprocesso WHERE id = " + id;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                TipoProcesso tp = new TipoProcesso();
+                tp.setId(rs.getInt("id"));
+                tp.setDescricao(rs.getString("descricao"));
+           	st.close();
+           	conn.close();
+           	return tp;
+            }
+            st.close();
+            conn.close();
+        } catch (Exception e) {
+            //System.err.println("Ocorreu uma exceção!");
+            //System.err.println(e.getMessage());
+        }
         return null;
     }
 }

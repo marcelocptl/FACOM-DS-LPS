@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class Processo {
     
     private int id;
-    private int numero;
-    private int numeroAux;
+    private String numero;
+    private String numeroAux;
     private String reclamada;
     private String descricao;
     private String situacao;
