@@ -14,6 +14,9 @@ import util.ConnectFactory;
 public class main {
     
     public static void main(String args[]) throws SQLException {
+        
+        ConnectFactory.setDb("192.168.29.110:3306", "test", "root", "mysql");
+        
         Connection connect = ConnectFactory.getConnection();
         System.out.println(connect.isClosed());
 
@@ -37,9 +40,9 @@ public class main {
 
         //inserir no banco de dados
         if (pf.inserir() == -1) {
-            System.out.println("Cliente não pode ser criado.");
+            System.out.println("Pessoa Física não pode ser criado.");
         } else {
-            System.out.println("Cliente criado com sucesso");
+            System.out.println("Pessoa Física criado com sucesso");
         }
 
         Advogado ad = new Advogado();
@@ -109,20 +112,20 @@ public class main {
         if (lem.inserir() == -1) {
             System.out.println("Lembrete não pode ser criado.");
         } else {
-            System.out.println("Lembrete criado com sucesso");
+            System.out.println("Lembrete CRIADO com sucesso.");
         }
         //atualizar
         lem.setHora(Time.valueOf("13:00:00"));
         if (lem.atualizar() == -1) {
             System.out.println("Lembrete não pode ser atualizado.");
         } else {
-            System.out.println("Lembrete criado com atualizado");
+            System.out.println("Lembrete ATUALIZADO com sucesso.");
         }
         //deletar
         if (lem.deletar() == -1) {
             System.out.println("Lembrete não pode ser deletado.");
         } else {
-            System.out.println("Lembrete criado com deletado");
+            System.out.println("Lembrete DELETADO com sucesso.");
         }
         
         System.out.println("lembretes: " + lem.listar().size());

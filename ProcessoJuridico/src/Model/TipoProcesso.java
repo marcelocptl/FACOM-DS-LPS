@@ -7,28 +7,28 @@ import Dao.TipoProcessoDao;
  * @author brucce
  */
 public class TipoProcesso {
-    private int codigo;
+    private int id;
     private String descricao;
 
     public TipoProcesso() {
     }
 
-    public TipoProcesso(int codigo, String descricao) {
-        this.codigo = codigo;
+    public TipoProcesso(int id, String descricao) {
+        this.id = id;
         this.descricao = descricao;
     }
     
     public int inserir(){
-        setCodigo(new TipoProcessoDao().inserir(this));
-        return getCodigo();
+        setId(new TipoProcessoDao().inserir(this));
+        return getId();
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescricao() {

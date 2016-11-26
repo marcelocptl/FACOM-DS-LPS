@@ -18,8 +18,8 @@ public class PessoaFisica extends Cliente {
     public PessoaFisica() {
     }
 
-    public PessoaFisica(String rg, String cpf, Date dataNascimento, String estadoCivil, int codigo, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
-        super(codigo, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
+    public PessoaFisica(String rg, String cpf, Date dataNascimento, String estadoCivil, int id, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        super(id, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
         this.rg = rg;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -27,16 +27,8 @@ public class PessoaFisica extends Cliente {
     }
     
     public int inserir() {
-        setCodigo(new ClienteDao().inserir(this));
-        return getCodigo();
-    }
-    
-    public int atualizar(){
-        return new ClienteDao().atualizar(this);
-    }
-    
-    public int deletar(){
-        return new ClienteDao().deletar(this);
+        setId(new ClienteDao().inserir(this));
+        return getId();
     }
     
     public String getRg() {

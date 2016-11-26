@@ -1,5 +1,8 @@
 package Model;
 
+import java.sql.Date;
+import java.util.ArrayList;
+
 /**
  *
  * @author brucce
@@ -13,6 +16,17 @@ public class ProcessoCompleto extends Processo {
     private String localidadeFaseAtual;
     private String forumFaseAtual;
     private String vara;
+
+    public ProcessoCompleto(String posicaoCliente, String adverso, String posicaoAdverso, String advogadoAdverso, String localidadeFaseAtual, String forumFaseAtual, String vara, int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, Funcionario funcionario, Assistente assistente) {
+        super(numero, numeroAux, reclamada, descricao, situacao, observacao, cidade, fase, dataInicial, dataFinal, documentos, cliente, advogado, tipoProcesso, funcionario, assistente);
+        this.posicaoCliente = posicaoCliente;
+        this.adverso = adverso;
+        this.posicaoAdverso = posicaoAdverso;
+        this.advogadoAdverso = advogadoAdverso;
+        this.localidadeFaseAtual = localidadeFaseAtual;
+        this.forumFaseAtual = forumFaseAtual;
+        this.vara = vara;
+    }
     
     public String getPosicaoCliente() {
         return posicaoCliente;

@@ -25,15 +25,13 @@ public class Processo {
     private Cliente cliente;
     private Advogado advogado;
     private TipoProcesso tipoProcesso;
-    private java.util.ArrayList<Honorario> honorarios;
     private Funcionario funcionario;
     private Assistente assistente;
-    private java.util.ArrayList<Lembrete> lembretes;
 
     public Processo() {
     }
 
-    public Processo(int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, ArrayList<Honorario> honorarios, Funcionario funcionario, Assistente assistente, ArrayList<Lembrete> lembretes) {
+    public Processo(int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, Funcionario funcionario, Assistente assistente) {
         this.numero = numero;
         this.numeroAux = numeroAux;
         this.reclamada = reclamada;
@@ -47,16 +45,14 @@ public class Processo {
         this.documentos = documentos;
         this.cliente = cliente;
         this.advogado = advogado;
-        this.tipoProcesso = tipoProcesso;
-        this.honorarios = honorarios;
+        this.tipoProcesso = tipoProcesso;      
         this.funcionario = funcionario;
         this.assistente = assistente;
-        this.lembretes = lembretes;
     }
     
     public int inserir(){
-        setCodigo(new ProcessoDao().inserir(this));
-        return getCodigo();
+        setId(new ProcessoDao().inserir(this));
+        return getId();
     }
     public int deletar(){
         return new ProcessoDao().deletar(this);
@@ -85,11 +81,11 @@ public class Processo {
         return new ProcessoDao().listarPorPessoa(string);
     }
     
-    public int getCodigo() {
+    public int getId() {
         return id;
     }
 
-    public void setCodigo(int id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -205,14 +201,6 @@ public class Processo {
         this.tipoProcesso = tipoProcesso;
     }
 
-    public ArrayList<Honorario> getHonorarios() {
-        return honorarios;
-    }
-
-    public void setHonorarios(ArrayList<Honorario> honorarios) {
-        this.honorarios = honorarios;
-    }
-
     public Funcionario getFuncionario() {
         return funcionario;
     }
@@ -227,13 +215,5 @@ public class Processo {
 
     public void setAssistente(Assistente assistente) {
         this.assistente = assistente;
-    }
-
-    public ArrayList<Lembrete> getLembretes() {
-        return lembretes;
-    }
-
-    public void setLembretes(ArrayList<Lembrete> lembretes) {
-        this.lembretes = lembretes;
     }
 }

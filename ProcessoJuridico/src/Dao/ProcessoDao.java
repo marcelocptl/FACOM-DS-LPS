@@ -35,11 +35,11 @@ public class ProcessoDao {
             preparedStmt.setDate(9, novo.getDataInicial());
             preparedStmt.setDate(10, novo.getDataFinal());
             preparedStmt.setString(11, novo.getDocumentos());
-            preparedStmt.setInt(12, novo.getTipoProcesso().getCodigo());
-            preparedStmt.setInt(13, novo.getCliente().getCodigo());
-            preparedStmt.setInt(14, novo.getAdvogado().getCodigo());
+            preparedStmt.setInt(12, novo.getTipoProcesso().getId());
+            preparedStmt.setInt(13, novo.getCliente().getId());
+            preparedStmt.setInt(14, novo.getAdvogado().getId());
             if(novo.getAssistente() != null){
-                preparedStmt.setInt(15, novo.getAssistente().getCodigo());
+                preparedStmt.setInt(15, novo.getAssistente().getId());
             }
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
@@ -48,8 +48,8 @@ public class ProcessoDao {
             }
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
-            e.printStackTrace();
+            //System.err.println(e.getMessage());
+            //e.printStackTrace();
         }
         return -1;
     }
@@ -57,12 +57,12 @@ public class ProcessoDao {
     public int deletar(Processo antigo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "delete Processo where id = ?";
+            String query = "delete processo where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1, antigo.getCodigo());
+            preparedStmt.setInt(1, antigo.getId());
             preparedStmt.execute();
             conn.close();
-            return antigo.getCodigo();
+            return antigo.getId();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
             //System.err.println(e.getMessage());
@@ -73,7 +73,7 @@ public class ProcessoDao {
     public int atualizar(Processo atual) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "update Processo set numero = ?, numeroaux = ?, reclamada = ?, descricao = ?, situacao = ?, observacao = ?, cidade = ?, fase = ?, datainicial = ?, datafinal = ?, documento = ?, id_tipoprocesso = ?, id_pessoa = ?, id_advogado = ?, id_assistente = ? where id = ?";
+            String query = "update processo set numero = ?, numeroaux = ?, reclamada = ?, descricao = ?, situacao = ?, observacao = ?, cidade = ?, fase = ?, datainicial = ?, datafinal = ?, documento = ?, id_tipoprocesso = ?, id_pessoa = ?, id_advogado = ?, id_assistente = ? where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1, atual.getNumero());
             preparedStmt.setInt(2, atual.getNumeroAux());
@@ -86,15 +86,15 @@ public class ProcessoDao {
             preparedStmt.setDate(9, atual.getDataInicial());
             preparedStmt.setDate(10, atual.getDataFinal());
             preparedStmt.setString(11, atual.getDocumentos());
-            preparedStmt.setInt(12, atual.getTipoProcesso().getCodigo());
-            preparedStmt.setInt(13, atual.getCliente().getCodigo());
-            preparedStmt.setInt(14, atual.getAdvogado().getCodigo());
-            preparedStmt.setInt(15, atual.getAssistente().getCodigo());
-            preparedStmt.setInt(16, atual.getCodigo());
+            preparedStmt.setInt(12, atual.getTipoProcesso().getId());
+            preparedStmt.setInt(13, atual.getCliente().getId());
+            preparedStmt.setInt(14, atual.getAdvogado().getId());
+            preparedStmt.setInt(15, atual.getAssistente().getId());
+            preparedStmt.setInt(16, atual.getId());
 
             preparedStmt.executeUpdate();
             conn.close();
-            return atual.getCodigo();
+            return atual.getId();
         } catch (Exception e) {
             //System.err.println("Ocorrtamoeu uma exceção!");
             //System.err.println(e.getMessage());
@@ -102,29 +102,29 @@ public class ProcessoDao {
         return -1;
     }
 
-    public static Processo getCodigo(int id) {
+    public static Processo getObj(int id) {
         return null;
     }
 
     public ArrayList<Processo> listar() {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM Processo";
+            String query = "SELECT * FROM processo";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
-                proc.setCodigo(rs.getInt("id"));
+                proc.setId(rs.getInt("id"));
                 proc.setNumero(rs.getInt("numero"));
                 proc.setNumeroAux(rs.getInt("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
-                proc.setTipoProcesso(TipoProcessoDao.getCodigo(rs.getInt("id_tipoprocesso")));
-                proc.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                proc.setAdvogado((Advogado) FuncionarioDao.getCodigo(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
+                proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 processos.add(proc);
             }
             st.close();
@@ -146,16 +146,16 @@ public class ProcessoDao {
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
-                proc.setCodigo(rs.getInt("id"));
+                proc.setId(rs.getInt("id"));
                 proc.setNumero(rs.getInt("numero"));
                 proc.setNumeroAux(rs.getInt("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
-                proc.setTipoProcesso(TipoProcessoDao.getCodigo(rs.getInt("id_tipoprocesso")));
-                proc.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                proc.setAdvogado((Advogado) FuncionarioDao.getCodigo(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
+                proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 processos.add(proc);
             }
             st.close();
@@ -171,22 +171,22 @@ public class ProcessoDao {
     public ArrayList<Processo> relatorioProcessos(String situacao) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM Processo";
+            String query = "SELECT * FROM processo";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
-                proc.setCodigo(rs.getInt("id"));
+                proc.setId(rs.getInt("id"));
                 proc.setNumero(rs.getInt("numero"));
                 proc.setNumeroAux(rs.getInt("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
-                proc.setTipoProcesso(TipoProcessoDao.getCodigo(rs.getInt("id_tipoprocesso")));
-                proc.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                proc.setAdvogado((Advogado) FuncionarioDao.getCodigo(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
+                proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 processos.add(proc);
             }
             st.close();
@@ -202,22 +202,22 @@ public class ProcessoDao {
     public ArrayList<Processo> relatorioConcluido(boolean pago) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM Processo";
+            String query = "SELECT * FROM processo";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
-                proc.setCodigo(rs.getInt("id"));
+                proc.setId(rs.getInt("id"));
                 proc.setNumero(rs.getInt("numero"));
                 proc.setNumeroAux(rs.getInt("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
-                proc.setTipoProcesso(TipoProcessoDao.getCodigo(rs.getInt("id_tipoprocesso")));
-                proc.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                proc.setAdvogado((Advogado) FuncionarioDao.getCodigo(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
+                proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 processos.add(proc);
             }
             st.close();
@@ -239,16 +239,16 @@ public class ProcessoDao {
             ArrayList<Processo> processos = new ArrayList<>();
             while (rs.next()) {
                 Processo proc = new Processo();
-                proc.setCodigo(rs.getInt("id"));
+                proc.setId(rs.getInt("id"));
                 proc.setNumero(rs.getInt("numero"));
                 proc.setNumeroAux(rs.getInt("numeroaux"));
                 proc.setReclamada(rs.getString("reclamada"));
                 proc.setDescricao(rs.getString("descricao"));
                 proc.setSituacao(rs.getString("situacao"));
-                proc.setTipoProcesso(TipoProcessoDao.getCodigo(rs.getInt("id_tipoprocesso")));
-                proc.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                proc.setAdvogado((Advogado) FuncionarioDao.getCodigo(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
+                proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 processos.add(proc);
             }
             st.close();

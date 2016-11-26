@@ -1,7 +1,7 @@
 package Model;
 
-import Dao.ClienteDao;
 import Dao.FuncionarioDao;
+import java.sql.Date;
 
 public class Advogado extends Funcionario {
 
@@ -11,10 +11,16 @@ public class Advogado extends Funcionario {
 
     public Advogado() {
     }
+
+    public Advogado(int numRegistroOAB, String situacaoRegistroOAB, String rg, String cpf, Date dataNascimento, String estadoCivil, int ramal, int id, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        super(rg, cpf, dataNascimento, estadoCivil, ramal, id, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
+        this.numRegistroOAB = numRegistroOAB;
+        this.situacaoRegistroOAB = situacaoRegistroOAB;
+    }
     
     public int inserir(){
-        setCodigo(new FuncionarioDao().inserir(this));
-        return getCodigo();
+        setId(new FuncionarioDao().inserir(this));
+        return getId();
     }
    
     public int getNumRegistroOAB() {

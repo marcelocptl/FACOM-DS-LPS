@@ -18,7 +18,7 @@ public class ClienteDao {
     public int inserir(PessoaFisica novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -36,7 +36,7 @@ public class ClienteDao {
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 int lastId = rs.getInt(1);
-                query = "insert into PessoaFisica (id, rg, cpf, dataNasc, estadoCivil) values (?, ?, ?, ?, ?)";
+                query = "insert into pessoafisica (id, rg, cpf, dataNasc, estadoCivil) values (?, ?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(query);
                 preparedStmt.setInt(1, lastId);
                 preparedStmt.setString(2, novo.getRg());
@@ -53,67 +53,11 @@ public class ClienteDao {
         }
         return -1;
     }
-
-    public int deletar(PessoaFisica antigo) {
-        try {
-            Connection conn = ConnectFactory.getConnection();
-            String query = "delete PessoaFisica users where id = ?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1, antigo.getCodigo());
-            preparedStmt.execute();
-            conn.close();
-            return 1;
-        } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
-        }
-        return -1;
-    }
-
-    public int atualizar(PessoaFisica atual) {
-        try {
-            Connection conn = ConnectFactory.getConnection();
-            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telcelular = ?, telresid = ?, email = ?, usuario = ?, senha = ? where id = ?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, atual.getNome());
-            preparedStmt.setString(2, atual.getEndereco());
-            preparedStmt.setString(3, atual.getCidade());
-            preparedStmt.setString(4, atual.getEstado());
-            preparedStmt.setString(5, atual.getCep());
-            preparedStmt.setString(6, atual.getComplemento());
-            preparedStmt.setString(7, atual.getTelefoneCelular());
-            preparedStmt.setString(8, atual.getTelefoneResidencial());
-            preparedStmt.setString(9, atual.getEmail());
-            preparedStmt.setString(10, atual.getUsuario());
-            preparedStmt.setString(11, atual.getSenha());
-            preparedStmt.setInt(12, atual.getCodigo());
-            preparedStmt.executeUpdate();
-
-            query = "update PessoaFisica set rg = ?, cpf = ?, dataNasc = ?, estadoCivil = ? where id = ?";
-            preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, atual.getRg());
-            preparedStmt.setString(2, atual.getCpf());
-            preparedStmt.setDate(3, atual.getDataNascimento());
-            preparedStmt.setString(4, atual.getEstadoCivil());
-            preparedStmt.setInt(5, atual.getCodigo());
-            preparedStmt.executeUpdate();
-            conn.close();
-            return 1;
-        } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
-        }
-        return -1;
-    }
-
-    public ArrayList<PessoaFisica> listarPessoaFisica() {
-        return null;
-    }
-
+    
     public int inserir(PessoaJuridica novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -131,7 +75,7 @@ public class ClienteDao {
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 int lastId = rs.getInt(1);
-                query = "insert into PessoaJuridica (id, cnpj, inscricaoEstadual, inscricaoMunicipal, site, nomeFantasia) values (?, ?, ?, ?, ?, ?)";
+                query = "insert into pessoafisica (id, cnpj, inscricaoEstadual, inscricaoMunicipal, site, nomeFantasia) values (?, ?, ?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(query);
                 preparedStmt.setInt(1, lastId);
                 preparedStmt.setString(2, novo.getCnpj());
@@ -149,69 +93,8 @@ public class ClienteDao {
         }
         return -1;
     }
-
-    public int deletar(PessoaJuridica antigo) {
-        try {
-            Connection conn = ConnectFactory.getConnection();
-            String query = "delete from PessoaJuridica where id = ?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1, antigo.getCodigo());
-            preparedStmt.execute();
-            return 1;
-        } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
-        }
-        return -1;
-    }
-
-    public int atualizar(PessoaJuridica atual) {
-        try {
-            Connection conn = ConnectFactory.getConnection();
-            String query = "update Pessoa set nome = ?, endereco = ?, cidade = ?, estado = ?, cep = ?, complemento = ?, telcelular = ?, telresid = ?, email = ?, usuario = ?, senha = ? where id = ?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, atual.getNome());
-            preparedStmt.setString(2, atual.getEndereco());
-            preparedStmt.setString(3, atual.getCidade());
-            preparedStmt.setString(4, atual.getEstado());
-            preparedStmt.setString(5, atual.getCep());
-            preparedStmt.setString(6, atual.getComplemento());
-            preparedStmt.setString(7, atual.getTelefoneCelular());
-            preparedStmt.setString(8, atual.getTelefoneResidencial());
-            preparedStmt.setString(9, atual.getEmail());
-            preparedStmt.setString(10, atual.getUsuario());
-            preparedStmt.setString(11, atual.getSenha());
-            preparedStmt.setInt(12, atual.getCodigo());
-            preparedStmt.executeUpdate();
-
-            query = "update PessoaJuridica set cnpj = ?, inscricaoEstadual = ?, inscricaoMunicipal = ?, site = ?, nomeFantasia = ? where id = ?";
-            preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, atual.getCnpj());
-            preparedStmt.setInt(2, atual.getInscricaoEstadual());
-            preparedStmt.setInt(3, atual.getInscricaoMunicipal());
-            preparedStmt.setString(4, atual.getSite());
-            preparedStmt.setString(5, atual.getNomeFantasia());
-            preparedStmt.setInt(6, atual.getCodigo());
-            preparedStmt.executeUpdate();
-            conn.close();
-            return 1;
-        } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
-        }
-        return -1;
-    }
     
-    public static Cliente getCodigo(int id){
-        
-        return null;
-    }
-
-    public ArrayList<PessoaJuridica> listarPessoaJuridica() {
-        return null;
-    }
-
-    public ArrayList<ProcessoDao> listarProcessos() {
+    public static Cliente getObj(int id){        
         return null;
     }
 }

@@ -17,8 +17,8 @@ public class PessoaJuridica extends Cliente {
     public PessoaJuridica() {
     }
 
-    public PessoaJuridica(String cnpj, int inscricaoEstadual, int inscricaoMunicipal, String site, String nomeFantasia, int codigo, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
-        super(codigo, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
+    public PessoaJuridica(String cnpj, int inscricaoEstadual, int inscricaoMunicipal, String site, String nomeFantasia, int id, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        super(id, nome, endereco, cidade, estado, cep, complemento, telefoneCelular, telefoneResidencial, email, usuario, senha);
         this.cnpj = cnpj;
         this.inscricaoEstadual = inscricaoEstadual;
         this.inscricaoMunicipal = inscricaoMunicipal;
@@ -27,8 +27,8 @@ public class PessoaJuridica extends Cliente {
     }
     
     public int inserir() {
-        setCodigo(new ClienteDao().inserir(this));
-        return getCodigo();
+        setId(new ClienteDao().inserir(this));
+        return getId();
     }
     
     public String getCnpj() {

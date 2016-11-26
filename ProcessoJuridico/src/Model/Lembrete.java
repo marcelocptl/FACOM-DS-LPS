@@ -24,11 +24,23 @@ public class Lembrete {
     public Lembrete() {
     }
 
-    public int getCodigo(){
+    public Lembrete(int id, Date data, Time hora, String local, String assunto, String descricao, Cliente cliente, Processo processo, Funcionario funcionario) {
+        this.id = id;
+        this.data = data;
+        this.hora = hora;
+        this.local = local;
+        this.assunto = assunto;
+        this.descricao = descricao;
+        this.cliente = cliente;
+        this.processo = processo;
+        this.funcionario = funcionario;
+    }   
+    
+    public int getId(){
         return id;
     }
     
-    public void setCodigo(int id){
+    public void setId(int id){
         this.id = id;
     }
     
@@ -105,8 +117,8 @@ public class Lembrete {
     }
 
     public int inserir() {
-        setCodigo(new LembreteDao().inserir(this));
-        return getCodigo();
+        setId(new LembreteDao().inserir(this));
+        return getId();
     }
 
     public int atualizar() {

@@ -17,16 +17,18 @@ public class LembreteDao {
     public int inserir(Lembrete novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Lembrete (data, hora, local, assunto, descricao, id_processo, id_pessoa, id_funcionario) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into lembrete"
+                    + " (data, hora, local, assunto, descricao, id_processo, id_pessoa, id_funcionario)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setDate(1, novo.getData());
             preparedStmt.setTime(2, novo.getHora());
             preparedStmt.setString(3, novo.getLocal());
             preparedStmt.setString(4, novo.getAssunto());
             preparedStmt.setString(5, novo.getDescricao());
-            preparedStmt.setInt(6, novo.getProcesso().getCodigo());
-            preparedStmt.setInt(7, novo.getCliente().getCodigo());
-            preparedStmt.setInt(8, novo.getFuncionario().getCodigo());
+            preparedStmt.setInt(6, novo.getProcesso().getId());
+            preparedStmt.setInt(7, novo.getCliente().getId());
+            preparedStmt.setInt(8, novo.getFuncionario().getId());
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
@@ -42,12 +44,12 @@ public class LembreteDao {
     public int deletar(Lembrete antigo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "delete from Lembrete where id = ?";
+            String query = "delete from lembrete where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1, antigo.getCodigo());
+            preparedStmt.setInt(1, antigo.getId());
             preparedStmt.execute();
             conn.close();
-            return antigo.getCodigo();
+            return antigo.getId();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
             //System.err.println(e.getMessage());
@@ -58,21 +60,23 @@ public class LembreteDao {
     public int atualizar(Lembrete atual) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "update Lembrete set data = ?, hora = ?, local = ?, assunto = ?, descricao = ?, id_processo = ?, id_pessoa = ?, id_funcionario = ? where id = ?";
+            String query = "update lembrete set data = ?, hora = ?, local = ?, assunto = ?,"
+                    + " descricao = ?, id_processo = ?, id_pessoa = ?, id_funcionario = ?"
+                    + " where id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setDate(1, atual.getData());
             preparedStmt.setTime(2, atual.getHora());
             preparedStmt.setString(3, atual.getLocal());
             preparedStmt.setString(4, atual.getAssunto());
             preparedStmt.setString(5, atual.getDescricao());
-            preparedStmt.setInt(6, atual.getProcesso().getCodigo());
-            preparedStmt.setInt(7, atual.getCliente().getCodigo());
-            preparedStmt.setInt(8, atual.getFuncionario().getCodigo());
-            preparedStmt.setInt(9, atual.getCodigo());
+            preparedStmt.setInt(6, atual.getProcesso().getId());
+            preparedStmt.setInt(7, atual.getCliente().getId());
+            preparedStmt.setInt(8, atual.getFuncionario().getId());
+            preparedStmt.setInt(9, atual.getId());
 
             preparedStmt.executeUpdate();
             conn.close();
-            return atual.getCodigo();
+            return atual.getId();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
             //System.err.println(e.getMessage());
@@ -89,15 +93,15 @@ public class LembreteDao {
             ArrayList<Lembrete> lembretes = new ArrayList<>();
             while (rs.next()) {
                 Lembrete lem = new Lembrete();
-                lem.setCodigo(rs.getInt("id"));
+                lem.setId(rs.getInt("id"));
                 lem.setData(rs.getDate("data"));
                 lem.setHora(rs.getTime("hora"));
                 lem.setLocal(rs.getString("local"));
                 lem.setAssunto(rs.getString("assunto"));
                 lem.setDescricao(rs.getString("descricao"));
-                lem.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                lem.setProcesso(ProcessoDao.getCodigo(rs.getInt("id_processo")));
-                lem.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                lem.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                lem.setProcesso(ProcessoDao.getObj(rs.getInt("id_processo")));
+                lem.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 lembretes.add(lem);
             }
             st.close();
@@ -119,15 +123,15 @@ public class LembreteDao {
             ArrayList<Lembrete> lembretes = new ArrayList<>();
             while (rs.next()) {
                 Lembrete lem = new Lembrete();
-                lem.setCodigo(rs.getInt("id"));
+                lem.setId(rs.getInt("id"));
                 lem.setData(rs.getDate("data"));
                 lem.setHora(rs.getTime("hora"));
                 lem.setLocal(rs.getString("local"));
                 lem.setAssunto(rs.getString("assunto"));
                 lem.setDescricao(rs.getString("descricao"));
-                lem.setCliente(ClienteDao.getCodigo(rs.getInt("id_pessoa")));
-                lem.setProcesso(ProcessoDao.getCodigo(rs.getInt("id_processo")));
-                lem.setFuncionario(FuncionarioDao.getCodigo(rs.getInt("id_funcionario")));
+                lem.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                lem.setProcesso(ProcessoDao.getObj(rs.getInt("id_processo")));
+                lem.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
                 lembretes.add(lem);
             }
             st.close();

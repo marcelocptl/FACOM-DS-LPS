@@ -27,24 +27,12 @@ public class TipoProcessoDao {
             }
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return -1;
     }
-
-    public int deletar(TipoProcesso antigo) {
-        return -1;
-    }
-
-    public int atualizar(TipoProcesso atual) {
-        return -1;
-    }
     
-    public static TipoProcesso getCodigo(int id){
-        return null;
-    }
-
-    public ArrayList<TipoProcesso> listar() {
+    public static TipoProcesso getObj(int id){
         return null;
     }
 }

@@ -15,7 +15,7 @@ public class FuncionarioDao {
     public int inserir(Advogado novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -33,7 +33,7 @@ public class FuncionarioDao {
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 int lastId = rs.getInt(1);
-                query = "insert into Funcionario (id, rg, cpf, dataNascimento, estadoCivil, ramal, flag, numRegistroOAB, situacaoRegistroOAB) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                query = "insert into funcionario (id, rg, cpf, dataNascimento, estadoCivil, ramal, flag, numRegistroOAB, situacaoRegistroOAB) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(query);
                 preparedStmt.setInt(1, lastId);
                 preparedStmt.setString(2, novo.getRg());
@@ -55,22 +55,10 @@ public class FuncionarioDao {
         return -1;
     }
 
-    public int deletar(Advogado antigo) {
-        return -1;
-    }
-
-    public int atualizar(Advogado atual) {
-        return -1;
-    }
-
-    public ArrayList<Advogado> listarAdvogado() {
-        return null;
-    }
-
     public int inserir(Assistente novo) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "insert into Pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into pessoa (nome, endereco, cidade, estado, cep, complemento, telcelular, telresid, email, usuario, senha, flag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, novo.getNome());
             preparedStmt.setString(2, novo.getEndereco());
@@ -88,7 +76,7 @@ public class FuncionarioDao {
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
                 int lastId = rs.getInt(1);
-                query = "insert into Funcionario (id, rg, cpf, dataNascimento, estadoCivil, ramal, flag) values (?, ?, ?, ?, ?, ?, ?)";
+                query = "insert into funcionario (id, rg, cpf, dataNascimento, estadoCivil, ramal, flag) values (?, ?, ?, ?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(query);
                 preparedStmt.setInt(1, lastId);
                 preparedStmt.setString(2, novo.getRg());
@@ -108,24 +96,8 @@ public class FuncionarioDao {
         return -1;
     }
 
-    public int deletar(Assistente antigo) {
-        return -1;
-    }
-
-    public int atualizar(Assistente atual) {
-        return -1;
-    }
-
-    public static Funcionario getCodigo(int id) {
+    public static Funcionario getObj(int id) {
         return null;
-    }
-
-    public ArrayList<Assistente> listarAssistente() {
-        return null;
-    }
-
-    public int atualizarLimitadoProcesso() {
-        return -1;
     }
 
 }

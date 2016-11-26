@@ -2,7 +2,7 @@ package Model;
 
 public class Pessoa {
 
-    private int codigo;
+    private int id;
 
     private String nome;
 
@@ -29,8 +29,8 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(int codigo, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
-        this.codigo = codigo;
+    public Pessoa(int id, String nome, String endereco, String cidade, String estado, String cep, String complemento, String telefoneCelular, String telefoneResidencial, String email, String usuario, String senha) {
+        this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.cidade = cidade;
@@ -43,18 +43,13 @@ public class Pessoa {
         this.usuario = usuario;
         this.senha = senha;
     }
-
-    @Override
-    public String toString() {
-        return "Pessoa";
-    }
     
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

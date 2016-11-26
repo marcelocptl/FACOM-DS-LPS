@@ -25,19 +25,10 @@ public class ConnectFactory {
         }
     }
 
-    public static void setDb(String db) {
+    public static void setDb(String db, String schema, String user, String password) {
         ConnectFactory.db = db;
-    }
-
-    public static void setSchema(String schema) {
         ConnectFactory.schema = schema;
-    }
-
-    public static void setUser(String user) {
         ConnectFactory.user = user;
-    }
-
-    public static void setPassword(String password) {
         ConnectFactory.password = password;
     }
     
