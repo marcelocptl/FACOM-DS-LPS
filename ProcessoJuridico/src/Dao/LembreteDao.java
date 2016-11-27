@@ -108,8 +108,8 @@ public class LembreteDao {
             conn.close();
             return lembretes;
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            System.err.println("Ocorreu uma exceção!");
+            System.err.println(e.getMessage());
         }
         return null;
     }
@@ -117,7 +117,9 @@ public class LembreteDao {
     public ArrayList<Lembrete> lembrar() {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM lembrete WHERE data <= '" + new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())+"'";
+            String query = "SELECT * FROM lembrete"
+                            +" WHERE data <= '" 
+                            + new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Lembrete> lembretes = new ArrayList<>();
@@ -137,6 +139,34 @@ public class LembreteDao {
             st.close();
             conn.close();
             return lembretes;
+        } catch (Exception e) {
+            System.err.println("Ocorreu uma exceção!");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    public static Lembrete getObj(int id) {
+	try {
+            Connection conn = ConnectFactory.getConnection();
+            String query = "SELECT * FROM lembrete WHERE id = " + id;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                Lembrete lem = new Lembrete();
+                lem.setId(rs.getInt("id"));
+                lem.setData(rs.getDate("data"));
+                lem.setHora(rs.getTime("hora"));
+                lem.setLocal(rs.getString("local"));
+                lem.setAssunto(rs.getString("assunto"));
+                lem.setDescricao(rs.getString("descricao"));
+                lem.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
+                lem.setProcesso(ProcessoDao.getObj(rs.getInt("id_processo")));
+                lem.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+           	st.close();
+           	conn.close();
+           	return lem;
+            }
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
             //System.err.println(e.getMessage());

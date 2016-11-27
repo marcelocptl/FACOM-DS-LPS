@@ -97,6 +97,7 @@ public class FuncionarioDao {
     }
 
     public static Funcionario getObj(int id) {
+        try{
             Connection conn = ConnectFactory.getConnection();
             String query = "SELECT * FROM pessoa WHERE id = " + id;
             Statement st = conn.createStatement();

@@ -31,7 +31,8 @@ public class Processo {
     public Processo() {
     }
 
-    public Processo(int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, Funcionario funcionario, Assistente assistente) {
+    public Processo(int id, String numero, String numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, Funcionario funcionario, Assistente assistente) {
+        this.id = id;
         this.numero = numero;
         this.numeroAux = numeroAux;
         this.reclamada = reclamada;
@@ -45,11 +46,11 @@ public class Processo {
         this.documentos = documentos;
         this.cliente = cliente;
         this.advogado = advogado;
-        this.tipoProcesso = tipoProcesso;      
+        this.tipoProcesso = tipoProcesso;
         this.funcionario = funcionario;
         this.assistente = assistente;
     }
-    
+
     public int inserir(){
         setId(new ProcessoDao().inserir(this));
         return getId();
@@ -77,8 +78,8 @@ public class Processo {
         return new ProcessoDao().relatorioConcluido(pago);
     }
     
-    public ArrayList<Processo> listarPorPessoa(String string){
-        return new ProcessoDao().listarPorPessoa(string);
+    public ArrayList<Processo> listarPorPessoa(Cliente c){
+        return new ProcessoDao().listarPorPessoa(c);
     }
     
     public int getId() {
@@ -88,23 +89,23 @@ public class Processo {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public int getNumero() {
+
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    public int getNumeroAux() {
+    public String getNumeroAux() {
         return numeroAux;
     }
 
-    public void setNumeroAux(int numeroAux) {
+    public void setNumeroAux(String numeroAux) {
         this.numeroAux = numeroAux;
     }
-
+    
     public String getReclamada() {
         return reclamada;
     }

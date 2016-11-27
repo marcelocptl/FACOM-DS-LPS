@@ -121,7 +121,7 @@ public class ProcessoDao {
                 proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
            	st.close();
            	conn.close();
            	return proc;
@@ -151,15 +151,15 @@ public class ProcessoDao {
                 proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
                 processos.add(proc);
             }
             st.close();
             conn.close();
             return processos;
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            System.err.println("Ocorreu uma exceção!");
+            System.err.println(e.getMessage());
         }
         return null;
     }
@@ -182,7 +182,7 @@ public class ProcessoDao {
                 proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
                 processos.add(proc);
             }
             st.close();
@@ -198,7 +198,7 @@ public class ProcessoDao {
     public ArrayList<Processo> relatorioProcessos(String situacao) {
         try {
             Connection conn = ConnectFactory.getConnection();
-            String query = "SELECT * FROM processo ORDER BY id_tipoprocesso";
+            String query = "SELECT * FROM processo WHERE situacao = '"+situacao+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Processo> processos = new ArrayList<>();
@@ -213,7 +213,7 @@ public class ProcessoDao {
                 proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
                 processos.add(proc);
             }
             st.close();
@@ -245,7 +245,7 @@ public class ProcessoDao {
                 proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
                 processos.add(proc);
             }
             st.close();
@@ -276,7 +276,7 @@ public class ProcessoDao {
                 proc.setTipoProcesso(TipoProcessoDao.getObj(rs.getInt("id_tipoprocesso")));
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
-                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
+                proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
                 processos.add(proc);
             }
             st.close();

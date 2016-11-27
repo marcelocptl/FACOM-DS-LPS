@@ -17,8 +17,8 @@ public class ProcessoCompleto extends Processo {
     private String forumFaseAtual;
     private String vara;
 
-    public ProcessoCompleto(String posicaoCliente, String adverso, String posicaoAdverso, String advogadoAdverso, String localidadeFaseAtual, String forumFaseAtual, String vara, int numero, int numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, Funcionario funcionario, Assistente assistente) {
-        super(numero, numeroAux, reclamada, descricao, situacao, observacao, cidade, fase, dataInicial, dataFinal, documentos, cliente, advogado, tipoProcesso, funcionario, assistente);
+    public ProcessoCompleto(String posicaoCliente, String adverso, String posicaoAdverso, String advogadoAdverso, String localidadeFaseAtual, String forumFaseAtual, String vara, int id, String numero, String numeroAux, String reclamada, String descricao, String situacao, String observacao, String cidade, String fase, Date dataInicial, Date dataFinal, String documentos, Cliente cliente, Advogado advogado, TipoProcesso tipoProcesso, Funcionario funcionario, Assistente assistente) {
+        super(id, numero, numeroAux, reclamada, descricao, situacao, observacao, cidade, fase, dataInicial, dataFinal, documentos, cliente, advogado, tipoProcesso, funcionario, assistente);
         this.posicaoCliente = posicaoCliente;
         this.adverso = adverso;
         this.posicaoAdverso = posicaoAdverso;
@@ -27,7 +27,7 @@ public class ProcessoCompleto extends Processo {
         this.forumFaseAtual = forumFaseAtual;
         this.vara = vara;
     }
-    
+
     public String getPosicaoCliente() {
         return posicaoCliente;
     }

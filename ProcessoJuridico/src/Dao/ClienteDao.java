@@ -94,7 +94,7 @@ public class ClienteDao {
         return -1;
     }
     
-    public static Cliente getObj(){
+    public static Cliente getObj(int id){
 	try {
             Connection conn = ConnectFactory.getConnection();
             String query = "SELECT * FROM pessoa WHERE id = " + id;
