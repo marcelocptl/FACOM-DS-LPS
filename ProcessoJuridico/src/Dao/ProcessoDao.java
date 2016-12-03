@@ -50,8 +50,8 @@ public class ProcessoDao {
             }
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
-            //e.printStackTrace();
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -67,7 +67,8 @@ public class ProcessoDao {
             return antigo.getId();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -99,7 +100,8 @@ public class ProcessoDao {
             return atual.getId();
         } catch (Exception e) {
             //System.err.println("Ocorrtamoeu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -128,7 +130,8 @@ public class ProcessoDao {
             }
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -158,8 +161,9 @@ public class ProcessoDao {
             conn.close();
             return processos;
         } catch (Exception e) {
-            System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            //System.err.println("Ocorreu uma exceção!");
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -190,7 +194,8 @@ public class ProcessoDao {
             return processos;
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -221,7 +226,8 @@ public class ProcessoDao {
             return processos;
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -253,7 +259,8 @@ public class ProcessoDao {
             return processos;
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -284,7 +291,8 @@ public class ProcessoDao {
             return processos;
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -306,8 +314,8 @@ public class ProcessoDao {
             return id;
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
-            //e.printStackTrace();
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }

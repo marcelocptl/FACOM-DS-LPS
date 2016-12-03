@@ -49,7 +49,8 @@ public class ClienteDao {
             conn.close();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //ystem.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -89,7 +90,8 @@ public class ClienteDao {
             conn.close();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -111,7 +113,7 @@ public class ClienteDao {
                 c.setComplemento(rs.getString("complemento"));
                 c.setTelefoneCelular(rs.getString("telcelular"));
                 c.setTelefoneResidencial(rs.getString("telresid"));
-                c.setEmail(rs.getString("email"));
+                c.setEmail(rs.getString("email"));amor vc comrpou um 
                 c.setUsuario(rs.getString("usuario"));
                 c.setSenha(rs.getString("senha"));
            	st.close();
@@ -120,9 +122,11 @@ public class ClienteDao {
             }
             st.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (Exception xceção!");
+            //System.err.println(e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
 	return null;
     }

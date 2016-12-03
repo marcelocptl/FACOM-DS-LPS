@@ -27,7 +27,8 @@ public class TipoProcessoDao {
             }
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return -1;
     }
@@ -50,7 +51,8 @@ public class TipoProcessoDao {
             conn.close();
         } catch (Exception e) {
             //System.err.println("Ocorreu uma exceção!");
-            //System.err.println(e.getMessage());
+            system.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
