@@ -23,10 +23,11 @@ public class TipoProcessoDao {
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -44,13 +45,13 @@ public class TipoProcessoDao {
                 tp.setId(rs.getInt("id"));
                 tp.setDescricao(rs.getString("descricao"));
            	st.close();
-           	conn.close();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
            	return tp;
             }
             st.close();
             conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }

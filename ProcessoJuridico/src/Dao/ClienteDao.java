@@ -44,11 +44,12 @@ public class ClienteDao {
                 preparedStmt.setDate(4, novo.getDataNascimento());
                 preparedStmt.setString(5, novo.getEstadoCivil());
                 preparedStmt.execute();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -85,11 +86,12 @@ public class ClienteDao {
                 preparedStmt.setString(5, novo.getSite());
                 preparedStmt.setString(6, novo.getNomeFantasia());
                 preparedStmt.execute();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -117,14 +119,14 @@ public class ClienteDao {
                 c.setUsuario(rs.getString("usuario"));
                 c.setSenha(rs.getString("senha"));
            	st.close();
-           	conn.close();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
            	return c;
             }
             st.close();
             conn.close();
         } catch (Exception xceção!");
             //System.err.println(e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }

@@ -45,11 +45,12 @@ public class FuncionarioDao {
                 preparedStmt.setInt(8, novo.getNumRegistroOAB());
                 preparedStmt.setString(9, novo.getSituacaoRegistroOAB());
                 preparedStmt.execute();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -86,12 +87,13 @@ public class FuncionarioDao {
                 preparedStmt.setString(5, novo.getEstadoCivil());
                 preparedStmt.setInt(6, novo.getRamal());
                 preparedStmt.setString(7, "ASSISTENTE");
-            preparedStmt.execute();
+                preparedStmt.execute();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -110,7 +112,7 @@ public class FuncionarioDao {
             if (rs.next() && rs2.next()) {
                 Funcionario f = new Funcionario();
                 f.setId(rs.getInt("id"));
-                f.setNome(rs.getString("nome"));
+                f.setNome(rs.g\n            //System.err.println("Ocorreu uma exceção!");etString("nome"));
                 f.setEndereco(rs.getString("endereco"));
                 f.setCidade(rs.getString("cidade"));
                 f.setEstado(rs.getString("estado"));
@@ -128,13 +130,13 @@ public class FuncionarioDao {
                 f.setEstadoCivil(rs.getString("estadocivil"));
                 f.setRamal(rs.getInt("ramal"));
            	st.close();
-           	conn.close();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
            	return f;
             }
             st.close();
             conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }

@@ -32,10 +32,12 @@ public class LembreteDao {
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
                 return rs.getInt(1);
             }
+            conn.close();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -49,10 +51,10 @@ public class LembreteDao {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1, antigo.getId());
             preparedStmt.execute();
+            system.out.println("Operação realizada com sucesso!");
             conn.close();
             return antigo.getId();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -77,10 +79,10 @@ public class LembreteDao {
             preparedStmt.setInt(9, atual.getId());
 
             preparedStmt.executeUpdate();
+            system.out.println("Operação realizada com sucesso!");
             conn.close();
             return atual.getId();
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -108,10 +110,10 @@ public class LembreteDao {
                 lembretes.add(lem);
             }
             st.close();
+            system.out.println("Operação realizada com sucesso!");
             conn.close();
             return lembretes;
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -141,10 +143,10 @@ public class LembreteDao {
                 lembretes.add(lem);
             }
             st.close();
+            system.out.println("Operação realizada com sucesso!");
             conn.close();
             return lembretes;
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -169,11 +171,11 @@ public class LembreteDao {
                 lem.setProcesso(ProcessoDao.getObj(rs.getInt("id_processo")));
                 lem.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
            	st.close();
-           	conn.close();
+                system.out.println("Operação realizada com sucesso!");
+                conn.close();
            	return lem;
             }
         } catch (Exception e) {
-            //System.err.println("Ocorreu uma exceção!");
             system.err.println(e.getMessage());
             e.printStackTrace();
         }
