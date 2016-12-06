@@ -46,12 +46,12 @@ public class ProcessoDao {
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;
@@ -64,11 +64,11 @@ public class ProcessoDao {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1, antigo.getId());
             preparedStmt.execute();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return antigo.getId();
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;
@@ -97,12 +97,12 @@ public class ProcessoDao {
             preparedStmt.setInt(16, atual.getId());
 
             preparedStmt.executeUpdate();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return atual.getId();
         } catch (Exception e) {
             //System.err.println("Ocorrtamoeu uma exceção!");
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;
@@ -127,12 +127,12 @@ public class ProcessoDao {
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
                 proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
            	st.close();
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
            	return proc;
             }
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -160,11 +160,11 @@ public class ProcessoDao {
                 processos.add(proc);
             }
             st.close();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return processos;
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -192,11 +192,11 @@ public class ProcessoDao {
                 processos.add(proc);
             }
             st.close();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return processos;
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -224,11 +224,11 @@ public class ProcessoDao {
                 processos.add(proc);
             }
             st.close();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return processos;
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -257,11 +257,11 @@ public class ProcessoDao {
                 processos.add(proc);
             }
             st.close();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return processos;
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -289,11 +289,11 @@ public class ProcessoDao {
                 processos.add(proc);
             }
             st.close();
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return processos;
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -313,11 +313,11 @@ public class ProcessoDao {
             preparedStmt.setString(6, novo.getLocalidadeFaseAtual());
             preparedStmt.setString(7, novo.getForumFaseAtual());
             preparedStmt.setString(8, novo.getVara());
-            system.out.println("Operação realizada com sucesso!");
+            System.out.println("Operação realizada com sucesso!");
             conn.close();
             return id;
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;

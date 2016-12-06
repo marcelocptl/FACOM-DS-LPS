@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import util.ConnectFactory;
 
 /**
@@ -44,13 +43,13 @@ public class ClienteDao {
                 preparedStmt.setDate(4, novo.getDataNascimento());
                 preparedStmt.setString(5, novo.getEstadoCivil());
                 preparedStmt.execute();
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;
@@ -86,13 +85,13 @@ public class ClienteDao {
                 preparedStmt.setString(5, novo.getSite());
                 preparedStmt.setString(6, novo.getNomeFantasia());
                 preparedStmt.execute();
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
                 return lastId;
             }
             conn.close();
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;
@@ -115,19 +114,19 @@ public class ClienteDao {
                 c.setComplemento(rs.getString("complemento"));
                 c.setTelefoneCelular(rs.getString("telcelular"));
                 c.setTelefoneResidencial(rs.getString("telresid"));
-                c.setEmail(rs.getString("email"));amor vc comrpou um 
+                c.setEmail(rs.getString("email")); 
                 c.setUsuario(rs.getString("usuario"));
                 c.setSenha(rs.getString("senha"));
            	st.close();
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
            	return c;
             }
             st.close();
             conn.close();
-        } catch (Exception xceção!");
+        } catch (Exception e) {
             //System.err.println(e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
 	return null;

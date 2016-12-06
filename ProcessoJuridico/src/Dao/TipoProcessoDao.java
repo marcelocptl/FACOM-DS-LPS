@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import util.ConnectFactory;
 
 /**
@@ -23,12 +22,12 @@ public class TipoProcessoDao {
             preparedStmt.execute();
             final ResultSet rs = preparedStmt.getGeneratedKeys();
             if (rs.next()) {
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return -1;
@@ -45,14 +44,14 @@ public class TipoProcessoDao {
                 tp.setId(rs.getInt("id"));
                 tp.setDescricao(rs.getString("descricao"));
            	st.close();
-                system.out.println("Operação realizada com sucesso!");
+                System.out.println("Operação realizada com sucesso!");
                 conn.close();
            	return tp;
             }
             st.close();
             conn.close();
         } catch (Exception e) {
-            system.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
         return null;
