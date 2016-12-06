@@ -126,10 +126,9 @@ public class ProcessoDao {
                 proc.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 proc.setAdvogado((Advogado) FuncionarioDao.getObj(rs.getInt("id_advogado")));
                 proc.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_assistente")));
-           	st.close();
-                System.out.println("Operação realizada com sucesso!");
+           	    st.close();                
                 conn.close();
-           	return proc;
+           	    return proc;
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());

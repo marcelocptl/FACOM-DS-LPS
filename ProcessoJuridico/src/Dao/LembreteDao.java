@@ -170,10 +170,9 @@ public class LembreteDao {
                 lem.setCliente(ClienteDao.getObj(rs.getInt("id_pessoa")));
                 lem.setProcesso(ProcessoDao.getObj(rs.getInt("id_processo")));
                 lem.setFuncionario(FuncionarioDao.getObj(rs.getInt("id_funcionario")));
-           	st.close();
-                System.out.println("Operação realizada com sucesso!");
+           		st.close();              
                 conn.close();
-           	return lem;
+           		return lem;
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());

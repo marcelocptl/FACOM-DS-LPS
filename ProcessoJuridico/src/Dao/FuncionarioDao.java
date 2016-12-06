@@ -128,10 +128,9 @@ public class FuncionarioDao {
                 f.setDataNascimento(rs.getDate("datanascimento"));
                 f.setEstadoCivil(rs.getString("estadocivil"));
                 f.setRamal(rs.getInt("ramal"));
-           	st.close();
-                System.out.println("Operação realizada com sucesso!");
+           	    st.close();                
                 conn.close();
-           	return f;
+           	    return f;
             }
             st.close();
             conn.close();

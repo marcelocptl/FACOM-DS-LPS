@@ -117,15 +117,13 @@ public class ClienteDao {
                 c.setEmail(rs.getString("email")); 
                 c.setUsuario(rs.getString("usuario"));
                 c.setSenha(rs.getString("senha"));
-           	st.close();
-                System.out.println("Operação realizada com sucesso!");
+           	    st.close();                
                 conn.close();
-           	return c;
+           	    return c;
             }
             st.close();
             conn.close();
-        } catch (Exception e) {
-            //System.err.println(e) {
+        } catch (Exception e) {            
             System.err.println(e.getMessage());
             e.printStackTrace();
         }

@@ -43,10 +43,9 @@ public class TipoProcessoDao {
                 TipoProcesso tp = new TipoProcesso();
                 tp.setId(rs.getInt("id"));
                 tp.setDescricao(rs.getString("descricao"));
-           	st.close();
-                System.out.println("Operação realizada com sucesso!");
+           	    st.close();                
                 conn.close();
-           	return tp;
+           	    return tp;
             }
             st.close();
             conn.close();
